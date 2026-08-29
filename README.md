@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LOOP — AI Customer Feedback Intelligence Platform
 
-## Getting Started
+Zidio Development Internship Project — Web Development Track
 
-First, run the development server:
+## What it is
+LOOP ingests customer feedback and uses Claude AI to classify sentiment, helping teams understand what customers are saying at a glance.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech Stack
+- Next.js 14 (App Router) + TypeScript
+- Tailwind CSS
+- PostgreSQL (Neon) + Prisma ORM
+- Anthropic Claude API (classification)
+- NextAuth (scaffolded, in progress)
+- Deployed on Vercel
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Live Demo
+https://loop-psi-one.vercel.app
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features Implemented
+- Multi-tenant data model (Workspace, User, Feedback, Theme, Report)
+- Dashboard, Inbox, Trends, Ask LOOP, Reports UI
+- Feedback inbox pulling live data from database
+- AI-powered sentiment classification via Claude API
+- Seed script with demo workspace, users, and feedback data
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Local Setup
+1. Clone the repo
+2. `npm install`
+3. Copy `.env.example` to `.env` and fill in your own values
+4. `npx prisma db push`
+5. `npx tsx prisma/seed.ts`
+6. `npm run dev`
 
-## Learn More
+## Demo Credentials (seeded)
+- Admin: admin@demo.com / password123
+- Analyst: analyst@demo.com / password123
+- Viewer: viewer@demo.com / password123
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Known Limitations
+- Login (NextAuth) is scaffolded but not fully functional yet
+- CSV upload, Ask LOOP Q&A, and Voice-of-Customer reports are planned next steps
