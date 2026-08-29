@@ -79,7 +79,7 @@ export default async function Inbox() {
                 </tr>
               </thead>
               <tbody>
-                {feedback.map((item) => (
+                  {feedback.map((item: typeof feedback[number]) => (
                   <tr key={item.id} className="border-b border-slate-800 last:border-0 hover:bg-slate-800/50">
                     <td className="px-5 py-4 max-w-md">{item.content}</td>
                     <td className="px-5 py-4 text-slate-400">{item.channel}</td>
