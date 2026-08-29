@@ -1,6 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+function parseCSVLine(line: string): string[] {
+  const result: string[] = [];
+  let current = "";
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    if (char === '"') {
+      inQuotes = !inQuotes;
+    } else if (char === "," && !inQuotes) {
+      result.push(current.trim());
+      current = "";
+    } else {
+      current += char;
+    }
+  }
+  result.push(current.trim());
+  return result;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
@@ -17,7 +37,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "CSV has no data rows" }, { status: 400 });
     }
 
-    const headers = lines[0].split(",").map((h) => h.trim().toLowerCase());
+    const headers = parseCSVLine(lines[0]).map((h) => h.toLowerCase());
     const contentIdx = headers.indexOf("content");
     const channelIdx = headers.indexOf("channel");
 
@@ -37,7 +57,7 @@ export async function POST(req: NextRequest) {
     let failed = 0;
 
     for (let i = 1; i < lines.length; i++) {
-      const cols = lines[i].split(",");
+      const cols = parseCSVLine(lines[i]);
       const content = cols[contentIdx]?.trim();
       const channel = cols[channelIdx]?.trim();
 
