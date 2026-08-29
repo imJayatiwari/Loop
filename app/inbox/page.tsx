@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { UploadForm } from "./upload-form";
+import { SimulateButton } from "./simulate-button";
 export const dynamic = "force-dynamic";
 export default async function Inbox() {
   const workspace = await prisma.workspace.findFirst();
@@ -47,7 +48,10 @@ export default async function Inbox() {
           <p className="text-slate-400">
             {feedback.length} feedback item{feedback.length !== 1 ? "s" : ""} · live from database
           </p>
-          <UploadForm />
+                    <div className="flex gap-3">
+            <SimulateButton />
+            <UploadForm />
+          </div>
         </div>
         <div className="flex gap-3 mb-6">
           <input
