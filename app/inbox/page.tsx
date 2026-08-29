@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-
+export const dynamic = "force-dynamic";
 export default async function Inbox() {
   const workspace = await prisma.workspace.findFirst();
 
